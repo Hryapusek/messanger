@@ -1,0 +1,5 @@
+@build:
+  echo {{GREEN}}--- Generating diesel {{BLUE}}schema.rs{{GREEN}} for database{{NORMAL}} 
+  diesel print-schema > src/schema.rs
+  echo {{GREEN}}--- Building rust database library{{NORMAL}} 
+  cargo build
