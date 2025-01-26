@@ -1,0 +1,11 @@
+# users
+- id serial primary key
+- name varchar(30) not null
+- surname varchar(30) not null
+- birth date
+- patronymic varchar(30) not null
+- email varchar(30) not null
+- is_email_confirmed boolean default false
+- phone varchar(30)
+- is_phone_confirmed boolean default false
+- password(hashed) varchar(?) not null
