@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package auth;
+
+import "google/protobuf/empty.proto";
+
+service AuthService {
+  rpc HelloWorld (google.protobuf.Empty) returns (HelloWorldResponse);
+}
+
+message HelloWorldResponse {
+  string hello = 1;
+}
