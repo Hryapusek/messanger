@@ -25,15 +25,21 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nauth.proto\x12\x04\x61uth\x1a\x1bgoogle/protobuf/empty.proto\"#\n\x12HelloWorldResponse\x12\r\n\x05hello\x18\x01 \x01(\t2M\n\x0b\x41uthService\x12>\n\nHelloWorld\x12\x16.google.protobuf.Empty\x1a\x18.auth.HelloWorldResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nauth.proto\x12\x04\x61uth\x1a\x1bgoogle/protobuf/empty.proto\"Q\n\x13RegisterUserRequest\x12\x0f\n\x05\x65mail\x18\x01 \x01(\tH\x00\x12\x0f\n\x05phone\x18\x02 \x01(\tH\x00\x12\x10\n\x08password\x18\x03 \x01(\tB\x06\n\x04user\"!\n\x10RegisterResponse\x12\r\n\x05token\x18\x01 \x01(\t\"J\n\x0cLoginRequest\x12\x0f\n\x05\x65mail\x18\x01 \x01(\tH\x00\x12\x0f\n\x05phone\x18\x02 \x01(\tH\x00\x12\x10\n\x08password\x18\x03 \x01(\tB\x06\n\x04user\"\x1e\n\rLoginResponse\x12\r\n\x05token\x18\x01 \x01(\t2\x82\x01\n\x0b\x41uthService\x12\x41\n\x0cRegisterUser\x12\x19.auth.RegisterUserRequest\x1a\x16.google.protobuf.Empty\x12\x30\n\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'auth_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_HELLOWORLDRESPONSE']._serialized_start=49
-  _globals['_HELLOWORLDRESPONSE']._serialized_end=84
-  _globals['_AUTHSERVICE']._serialized_start=86
-  _globals['_AUTHSERVICE']._serialized_end=163
+  _globals['_REGISTERUSERREQUEST']._serialized_start=49
+  _globals['_REGISTERUSERREQUEST']._serialized_end=130
+  _globals['_REGISTERRESPONSE']._serialized_start=132
+  _globals['_REGISTERRESPONSE']._serialized_end=165
+  _globals['_LOGINREQUEST']._serialized_start=167
+  _globals['_LOGINREQUEST']._serialized_end=241
+  _globals['_LOGINRESPONSE']._serialized_start=243
+  _globals['_LOGINRESPONSE']._serialized_end=273
+  _globals['_AUTHSERVICE']._serialized_start=276
+  _globals['_AUTHSERVICE']._serialized_end=406
 # @@protoc_insertion_point(module_scope)

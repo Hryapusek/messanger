@@ -35,17 +35,28 @@ class AuthServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.HelloWorld = channel.unary_unary(
-                '/auth.AuthService/HelloWorld',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=auth__pb2.HelloWorldResponse.FromString,
+        self.RegisterUser = channel.unary_unary(
+                '/auth.AuthService/RegisterUser',
+                request_serializer=auth__pb2.RegisterUserRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                _registered_method=True)
+        self.Login = channel.unary_unary(
+                '/auth.AuthService/Login',
+                request_serializer=auth__pb2.LoginRequest.SerializeToString,
+                response_deserializer=auth__pb2.LoginResponse.FromString,
                 _registered_method=True)
 
 
 class AuthServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def HelloWorld(self, request, context):
+    def RegisterUser(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Login(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -54,10 +65,15 @@ class AuthServiceServicer(object):
 
 def add_AuthServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'HelloWorld': grpc.unary_unary_rpc_method_handler(
-                    servicer.HelloWorld,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=auth__pb2.HelloWorldResponse.SerializeToString,
+            'RegisterUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.RegisterUser,
+                    request_deserializer=auth__pb2.RegisterUserRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'Login': grpc.unary_unary_rpc_method_handler(
+                    servicer.Login,
+                    request_deserializer=auth__pb2.LoginRequest.FromString,
+                    response_serializer=auth__pb2.LoginResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -71,7 +87,7 @@ class AuthService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def HelloWorld(request,
+    def RegisterUser(request,
             target,
             options=(),
             channel_credentials=None,
@@ -84,9 +100,36 @@ class AuthService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/auth.AuthService/HelloWorld',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            auth__pb2.HelloWorldResponse.FromString,
+            '/auth.AuthService/RegisterUser',
+            auth__pb2.RegisterUserRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def Login(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/auth.AuthService/Login',
+            auth__pb2.LoginRequest.SerializeToString,
+            auth__pb2.LoginResponse.FromString,
             options,
             channel_credentials,
             insecure,

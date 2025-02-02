@@ -2,8 +2,11 @@ syntax = "proto3";
 
 package auth;
 
+import "google/protobuf/empty.proto";
+
 service AuthService {
-  rpc RegisterUser (RegisterUserRequest) returns (RegisterResponse);
+  rpc RegisterUser (RegisterUserRequest) returns (google.protobuf.Empty);
+  rpc Login (LoginRequest) returns (LoginResponse);
 }
 
 message RegisterUserRequest {
@@ -15,5 +18,17 @@ message RegisterUserRequest {
 }
 
 message RegisterResponse {
+  string token = 1;
+}
+
+message LoginRequest {
+  oneof user {
+    string email = 1;
+    string phone = 2; 
+  }
+  string password = 3;
+}
+
+message LoginResponse {
   string token = 1;
 }

@@ -38,7 +38,7 @@ pub fn get_user_by_email(user_email: &str) -> Result<Option<User>, String> {
     .map_err(|e| e.to_string())
 }
 
-pub fn get_user_by_phone(user_phone: String) -> Result<Option<User>, String> {
+pub fn get_user_by_phone(user_phone: &str) -> Result<Option<User>, String> {
   let mut conn = establish_connection().map_err(|e| e.to_string())?;
 
   users::table

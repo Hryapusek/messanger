@@ -10,6 +10,13 @@ prost-types = "0.13.4"
 tokio = {version="1.43.0", features=["rt-multi-thread"]}
 tonic = "0.12.3"
 database_api = { path = "../database_api" }
+env_logger = "0.11.6"
+log = "0.4.25"
+jwt = "0.16.0"
+hmac = "0.12.1"
+sha2 = "0.10.8"
+dotenv = "0.15.0"
+chrono = "0.4.39"
 
 [build-dependencies]
 tonic-build = "0.12.3"
