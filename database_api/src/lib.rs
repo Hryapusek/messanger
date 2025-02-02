@@ -1,4 +1,4 @@
-mod models;
-mod schema;
-mod connection;
-mod api;
+pub mod models;
+pub mod schema;
+pub mod connection;
+pub mod api;

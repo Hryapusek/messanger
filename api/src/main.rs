@@ -4,7 +4,7 @@ use std::str::FromStr;
 use auth::AuthServiceService;
 use auth::auth_service_server::AuthServiceServer;
 use tonic::transport::Server;
-
+use database_api::api::refresh_token::*;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
