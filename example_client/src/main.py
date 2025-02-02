@@ -9,14 +9,26 @@ from google.protobuf.empty_pb2 import Empty
 import proto.auth_pb2_grpc as auth_grpc
 from proto.auth_pb2 import *
 
-def main():
-  channel = grpc.insecure_channel('localhost:50051')
+def login(channel):
+  stub = auth_grpc.AuthServiceStub(channel)
+  response = stub.Login(LoginRequest(
+    email="sus",
+    password="Samvel25"
+  ))
+  print(response)
+
+def register(channel):
   stub = auth_grpc.AuthServiceStub(channel)
   response = stub.RegisterUser(RegisterUserRequest(
     email="sus",
     password="Samvel25"
   ))
   print(response)
+
+def main():
+  channel = grpc.insecure_channel('localhost:50051')
+  # register(channel)
+  login(channel)
 
 if __name__ == '__main__':
   main()
