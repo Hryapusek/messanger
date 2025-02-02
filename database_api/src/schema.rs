@@ -44,6 +44,16 @@ diesel::table! {
 }
 
 diesel::table! {
+    refresh_tokens (id) {
+        id -> Int4,
+        user_id -> Int4,
+        token -> Text,
+        created_at -> Timestamp,
+        expires_at -> Timestamp,
+    }
+}
+
+diesel::table! {
     users (id) {
         id -> Int4,
         #[max_length = 30]
@@ -69,6 +79,7 @@ diesel::joinable!(direct_chat_message -> messages (message_id));
 diesel::joinable!(message_attachment -> attachments (attachment_id));
 diesel::joinable!(message_attachment -> messages (message_id));
 diesel::joinable!(messages -> users (sender_id));
+diesel::joinable!(refresh_tokens -> users (user_id));
 
 diesel::allow_tables_to_appear_in_same_query!(
     attachments,
@@ -76,5 +87,6 @@ diesel::allow_tables_to_appear_in_same_query!(
     direct_chats,
     message_attachment,
     messages,
+    refresh_tokens,
     users,
 );
