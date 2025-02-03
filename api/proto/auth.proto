@@ -7,6 +7,7 @@ import "google/protobuf/empty.proto";
 service AuthService {
   rpc RegisterUser (RegisterUserRequest) returns (google.protobuf.Empty);
   rpc Login (LoginRequest) returns (LoginResponse);
+  rpc LoginRefreshToken (LoginRefreshTokenRequest) returns (LoginResponse);
 }
 
 message RegisterUserRequest {
@@ -24,11 +25,16 @@ message RegisterResponse {
 message LoginRequest {
   oneof user {
     string email = 1;
-    string phone = 2; 
+    string phone = 2;
   }
   string password = 3;
 }
 
+message LoginRefreshTokenRequest {
+  string refresh_token = 1;
+}
+
 message LoginResponse {
-  string token = 1;
+  string access_token = 1;
+  string refresh_token = 2;
 }

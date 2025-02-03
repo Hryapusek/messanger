@@ -5,5 +5,5 @@ CREATE TABLE refresh_tokens (
   token TEXT NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   expires_at TIMESTAMP NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users (id)
+  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE
 )

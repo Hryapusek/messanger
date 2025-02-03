@@ -1,14 +1,16 @@
 use std::collections::BTreeMap;
 
-use database_api::models::user::User;
+use crate::auth::constants::{REFRESH_TOKEN_DAYS_TO_EXPIRE, REFRESH_TOKEN_LENGTH, USER_ID};
+use chrono::{self, Duration};
+use database_api::models::{refresh_token::RefreshToken, user::User};
 use hmac::{Hmac, Mac};
 use jwt::*;
-use sha2::{Sha256, Digest};
+use rand::distr::SampleString;
+use rand_distr::Alphanumeric;
+use sha2::{Digest, Sha256};
 use tonic::Status;
-use chrono;
-use crate::auth::constants::USER_ID;
 
-use super::constants::{DAYS_TO_EXPIRE, EXPIRE_AT};
+use super::constants::{EXPIRE_AT, JWT_DAYS_TO_EXPIRE};
 
 pub fn check_password(password: &str) -> Result<(), Status> {
     const MIN_PASSWORD_LENGTH: usize = 8;
@@ -26,16 +28,31 @@ pub fn hash_password(password: &str) -> String {
     format!("{:x}", hasher.finalize())
 }
 
-pub fn create_token(user: &User) -> Result<String, String> {
+pub fn create_access_token(user: &User) -> Result<String, String> {
     let mut claims = BTreeMap::new();
     claims.insert(USER_ID, user.id.to_string());
     let today = chrono::Utc::now().naive_utc();
-    let expire_at = today + chrono::Duration::days(DAYS_TO_EXPIRE);
+    let expire_at = today + chrono::Duration::days(JWT_DAYS_TO_EXPIRE);
     claims.insert(EXPIRE_AT, expire_at.and_utc().timestamp().to_string());
     let key: Hmac<Sha256> = Hmac::new_from_slice(
         std::env::var("SECRET_JWT_KEY")
             .expect("Secret key is not set")
             .as_bytes(),
-    ).map_err(|e| e.to_string())?;
+    )
+    .map_err(|e| e.to_string())?;
     claims.sign_with_key(&key).map_err(|e| e.to_string())
+}
+
+pub fn create_refresh_token(user: &User) -> Result<RefreshToken, String> {
+    let refresh_token_string = Alphanumeric.sample_string(&mut rand::rng(), REFRESH_TOKEN_LENGTH);
+
+    let result = RefreshToken {
+        user_id: user.id,
+        token: refresh_token_string,
+        created_at: chrono::Utc::now().naive_utc(),
+        expires_at: chrono::Utc::now().naive_utc() + Duration::days(REFRESH_TOKEN_DAYS_TO_EXPIRE),
+        ..Default::default()
+    };
+
+    database_api::api::refresh_token::create_refresh_token(&result)
 }

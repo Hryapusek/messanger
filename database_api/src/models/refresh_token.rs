@@ -1,7 +1,7 @@
 use crate::schema::*;
 use diesel::prelude::*;
 
-#[derive(Queryable, Insertable, Selectable, AsChangeset)]
+#[derive(Queryable, Insertable, Selectable, AsChangeset, Default)]
 #[diesel(table_name = refresh_tokens)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct RefreshToken {
