@@ -6,7 +6,7 @@ pub struct AuthServiceService {}
 use super::utils::{create_access_token, create_refresh_token};
 use crate::auth::service::*;
 use crate::auth::utils::hash_password;
-use database_api::api::refresh_token::get_refresh_token_by_value;
+use database_api::api::refresh_token::{delete_refresh_token, get_refresh_token_by_value};
 use database_api::api::users::*;
 use log::{error, warn};
 use tonic::*;
@@ -122,6 +122,10 @@ impl auth_service_server::AuthService for AuthServiceService {
         if let Err(e) = refresh_token {
             warn!("Failed to create refresh token: {}", e);
             return Err(Status::internal(""));
+        }
+
+        if let Err(e) = delete_refresh_token(found_token.id) {
+            warn!("Failed to delete refresh token: {}", e);
         }
 
         Ok(Response::new(LoginResponse {
