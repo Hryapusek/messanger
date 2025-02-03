@@ -2,7 +2,7 @@ use std::collections::BTreeMap;
 
 use crate::auth::constants::{REFRESH_TOKEN_DAYS_TO_EXPIRE, REFRESH_TOKEN_LENGTH, USER_ID};
 use chrono::{self, Duration};
-use database_api::models::{refresh_token::RefreshToken, user::User};
+use database_api::models::{refresh_token::{NewRefreshToken, RefreshToken}, user::User};
 use hmac::{Hmac, Mac};
 use jwt::*;
 use rand::distr::SampleString;
@@ -46,12 +46,11 @@ pub fn create_access_token(user: &User) -> Result<String, String> {
 pub fn create_refresh_token(user: &User) -> Result<RefreshToken, String> {
     let refresh_token_string = Alphanumeric.sample_string(&mut rand::rng(), REFRESH_TOKEN_LENGTH);
 
-    let result = RefreshToken {
+    let result = NewRefreshToken {
         user_id: user.id,
         token: refresh_token_string,
-        created_at: chrono::Utc::now().naive_utc(),
-        expires_at: chrono::Utc::now().naive_utc() + Duration::days(REFRESH_TOKEN_DAYS_TO_EXPIRE),
-        ..Default::default()
+        created_at: None,
+        expires_at: chrono::Utc::now().naive_utc() + Duration::days(REFRESH_TOKEN_DAYS_TO_EXPIRE)
     };
 
     database_api::api::refresh_token::create_refresh_token(&result)

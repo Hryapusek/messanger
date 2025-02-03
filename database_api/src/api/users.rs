@@ -8,7 +8,7 @@ use crate::models::user::*;
 
 use crate::connection::*;
 
-pub fn create_user(user: User) -> Result<User, String>  {
+pub fn create_user(user: NewUser) -> Result<User, String>  {
 
   let mut conn = establish_connection().map_err(|e| e.to_string())?;
 

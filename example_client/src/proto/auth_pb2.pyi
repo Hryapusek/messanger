@@ -31,8 +31,16 @@ class LoginRequest(_message.Message):
     password: str
     def __init__(self, email: _Optional[str] = ..., phone: _Optional[str] = ..., password: _Optional[str] = ...) -> None: ...
 
+class LoginRefreshTokenRequest(_message.Message):
+    __slots__ = ("refresh_token",)
+    REFRESH_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    refresh_token: str
+    def __init__(self, refresh_token: _Optional[str] = ...) -> None: ...
+
 class LoginResponse(_message.Message):
-    __slots__ = ("token",)
-    TOKEN_FIELD_NUMBER: _ClassVar[int]
-    token: str
-    def __init__(self, token: _Optional[str] = ...) -> None: ...
+    __slots__ = ("access_token", "refresh_token")
+    ACCESS_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    REFRESH_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    access_token: str
+    refresh_token: str
+    def __init__(self, access_token: _Optional[str] = ..., refresh_token: _Optional[str] = ...) -> None: ...

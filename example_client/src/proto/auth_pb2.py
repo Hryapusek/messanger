@@ -25,7 +25,7 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nauth.proto\x12\x04\x61uth\x1a\x1bgoogle/protobuf/empty.proto\"Q\n\x13RegisterUserRequest\x12\x0f\n\x05\x65mail\x18\x01 \x01(\tH\x00\x12\x0f\n\x05phone\x18\x02 \x01(\tH\x00\x12\x10\n\x08password\x18\x03 \x01(\tB\x06\n\x04user\"!\n\x10RegisterResponse\x12\r\n\x05token\x18\x01 \x01(\t\"J\n\x0cLoginRequest\x12\x0f\n\x05\x65mail\x18\x01 \x01(\tH\x00\x12\x0f\n\x05phone\x18\x02 \x01(\tH\x00\x12\x10\n\x08password\x18\x03 \x01(\tB\x06\n\x04user\"\x1e\n\rLoginResponse\x12\r\n\x05token\x18\x01 \x01(\t2\x82\x01\n\x0b\x41uthService\x12\x41\n\x0cRegisterUser\x12\x19.auth.RegisterUserRequest\x1a\x16.google.protobuf.Empty\x12\x30\n\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nauth.proto\x12\x04\x61uth\x1a\x1bgoogle/protobuf/empty.proto\"Q\n\x13RegisterUserRequest\x12\x0f\n\x05\x65mail\x18\x01 \x01(\tH\x00\x12\x0f\n\x05phone\x18\x02 \x01(\tH\x00\x12\x10\n\x08password\x18\x03 \x01(\tB\x06\n\x04user\"!\n\x10RegisterResponse\x12\r\n\x05token\x18\x01 \x01(\t\"J\n\x0cLoginRequest\x12\x0f\n\x05\x65mail\x18\x01 \x01(\tH\x00\x12\x0f\n\x05phone\x18\x02 \x01(\tH\x00\x12\x10\n\x08password\x18\x03 \x01(\tB\x06\n\x04user\"1\n\x18LoginRefreshTokenRequest\x12\x15\n\rrefresh_token\x18\x01 \x01(\t\"<\n\rLoginResponse\x12\x14\n\x0c\x61\x63\x63\x65ss_token\x18\x01 \x01(\t\x12\x15\n\rrefresh_token\x18\x02 \x01(\t2\xcc\x01\n\x0b\x41uthService\x12\x41\n\x0cRegisterUser\x12\x19.auth.RegisterUserRequest\x1a\x16.google.protobuf.Empty\x12\x30\n\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x12H\n\x11LoginRefreshToken\x12\x1e.auth.LoginRefreshTokenRequest\x1a\x13.auth.LoginResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -38,8 +38,10 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_REGISTERRESPONSE']._serialized_end=165
   _globals['_LOGINREQUEST']._serialized_start=167
   _globals['_LOGINREQUEST']._serialized_end=241
-  _globals['_LOGINRESPONSE']._serialized_start=243
-  _globals['_LOGINRESPONSE']._serialized_end=273
-  _globals['_AUTHSERVICE']._serialized_start=276
-  _globals['_AUTHSERVICE']._serialized_end=406
+  _globals['_LOGINREFRESHTOKENREQUEST']._serialized_start=243
+  _globals['_LOGINREFRESHTOKENREQUEST']._serialized_end=292
+  _globals['_LOGINRESPONSE']._serialized_start=294
+  _globals['_LOGINRESPONSE']._serialized_end=354
+  _globals['_AUTHSERVICE']._serialized_start=357
+  _globals['_AUTHSERVICE']._serialized_end=561
 # @@protoc_insertion_point(module_scope)

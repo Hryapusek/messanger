@@ -1,6 +1,6 @@
 use crate::auth::auth::RegisterUserRequest;
 use database_api::{
-    api::users::{create_user, get_user_by_email, get_user_by_phone}, models::user::User,
+    api::users::{create_user, get_user_by_email, get_user_by_phone}, models::user::{NewUser, User},
 };
 use tonic::*;
 use log::{warn, error, info};
@@ -16,7 +16,7 @@ pub fn register_by_email(email: &str, request: &RegisterUserRequest) -> Result<U
 
     check_password(&request.password)?;
 
-    let result = create_user(User {
+    let result = create_user(NewUser {
         email: email.to_string(),
         password: hash_password(&request.password),
         ..Default::default()
@@ -39,7 +39,7 @@ pub fn register_by_phone(phone: &str, request: &RegisterUserRequest) -> Result<U
 
   check_password(&request.password)?;
 
-  let result = create_user(User {
+  let result = create_user(NewUser {
       phone: Some(phone.to_owned()),
       password: hash_password(&request.password),
       ..Default::default()

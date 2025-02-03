@@ -1,13 +1,13 @@
 use std::ops;
 
-use crate::models::refresh_token::RefreshToken;
+use crate::models::refresh_token::{NewRefreshToken, RefreshToken};
 use crate::schema::refresh_tokens;
 
 use diesel::prelude::*;
 
 use crate::connection::*;
 
-pub fn create_refresh_token(refresh_token: &RefreshToken) -> Result<RefreshToken, String>  {
+pub fn create_refresh_token(refresh_token: &NewRefreshToken) -> Result<RefreshToken, String>  {
 
   let mut conn = establish_connection().map_err(|e| e.to_string())?;
 
